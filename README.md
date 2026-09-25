@@ -2,14 +2,14 @@
 
 手机、平板和桌面可用的学习工作台 MVP。把课件、图片圈选、课堂时间轴、笔记和复习卡片连接起来，并通过内置工具流程完成翻译、解释、整理和保存。
 
-本项目独立位于 `D:\khoj\software`，不依赖也不修改上级 Khoj 应用。后端为 Node.js + SQLite，前端为原生 JavaScript / CSS。网页端无需构建；Android APK 可用本机 SDK 打包。
+本项目独立位于 `D:\software`。后端为 Node.js + SQLite，前端为原生 JavaScript / CSS。网页端无需构建；Android APK 可用本机 SDK 打包。
 
 ## 启动
 
 需要 Node.js 22.13+（本机使用 Node.js 24.13.1）。
 
 ```powershell
-cd D:\khoj\software
+cd D:\software
 npm install
 npm start
 ```
