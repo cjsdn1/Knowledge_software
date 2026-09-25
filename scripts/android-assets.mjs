@@ -1,0 +1,11 @@
+import { cpSync, copyFileSync, mkdirSync } from 'node:fs';
+import { join, resolve } from 'node:path';
+import { fileURLToPath } from 'node:url';
+const root = resolve(fileURLToPath(new URL('..', import.meta.url)));
+const target = resolve(root, 'android/app/src/main/assets');
+if (!target.startsWith(root + (process.platform === 'win32' ? '\\' : '/'))) throw new Error('Android assets must stay inside the project.');
+mkdirSync(target, { recursive: true });
+cpSync(join(root, 'public'), target, { recursive: true, force: true });
+mkdirSync(join(target, 'vendor'), { recursive: true });
+for (const file of ['pdf.mjs', 'pdf.worker.mjs']) copyFileSync(join(root, 'node_modules/pdfjs-dist/build', file), join(target, 'vendor', file));
+console.log('Android bundled UI synchronized:', target);

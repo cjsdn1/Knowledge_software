@@ -1,0 +1,11 @@
+{
+  "name": "study-companion",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "拾知 · 屏幕学习助手与工具调度台",
+  "engines": { "node": ">=22.13" },
+  "scripts": { "start": "node --env-file-if-exists=.env server.mjs", "start:mobile": "node --env-file-if-exists=.env scripts/start-mobile.mjs", "dev": "node --watch --env-file-if-exists=.env server.mjs", "test": "node --test tests/*.test.mjs", "test:ui": "node tests/browser.mjs", "preview:overlay": "node scripts/preview-overlay.mjs", "android:assets": "node scripts/android-assets.mjs", "android:apk": "node scripts/build-android.mjs" },
+  "dependencies": { "jszip": "^3.10.1", "pdfjs-dist": "^6.2.108" },
+  "devDependencies": { "@playwright/test": "^1.55.0" }
+}

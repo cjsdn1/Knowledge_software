@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#e9f0ea">
+  <title>拾知 · 手机悬浮窗规划页</title>
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/overlay-plan.css">
+</head>
+<body>
+  <svg class="symbols" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-chevron" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="i-clip" viewBox="0 0 24 24"><path d="m8 12 5.5-5.5a3.5 3.5 0 0 1 5 5L10 20a5 5 0 0 1-7-7l9-9"/></symbol>
+    <symbol id="i-scan" viewBox="0 0 24 24"><path d="M8 3H4a1 1 0 0 0-1 1v4m13-5h4a1 1 0 0 1 1 1v4M3 16v4a1 1 0 0 0 1 1h4m13-5v4a1 1 0 0 1-1 1h-4M4 12h16"/></symbol>
+    <symbol id="i-spark" viewBox="0 0 24 24"><path d="m12 2 2.2 6.8L21 11l-6.8 2.2L12 20l-2.2-6.8L3 11l6.8-2.2L12 2Zm7 16v4m-2-2h4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="m4 12 5 5L20 6"/></symbol>
+    <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h2"/></symbol>
+    <symbol id="i-file" viewBox="0 0 24 24"><path d="M5 3h9l5 5v13H5V3Zm9 0v5h5M8 13h8m-8 4h8"/></symbol>
+  </svg>
+
+  <main class="workbench">
+    <div class="workbench-head">
+      <div><span class="eyebrow">拾知 · 交互规划页</span><h1>手机悬浮窗</h1><p>按手机尺寸预览。点击工具、添加文档或模拟截图，查看完整流程。</p></div>
+      <button class="theme-toggle" id="theme-toggle" type="button" aria-label="切换系统配色">配色：跟随系统</button>
+    </div>
+
+    <div class="phone" id="phone">
+      <nav class="preview-controls" aria-label="验收场景"><span>交互预览</span><button id="surface-toggle" type="button">悬浮窗</button><button id="protected-demo" type="button" aria-pressed="false">保护场景</button></nav>
+      <div class="status-bar" aria-hidden="true"><strong>9:41</strong><span>● ● ●  ▰</span></div>
+      <div class="host-page" aria-hidden="true">
+        <div class="host-head"><span class="host-logo">微</span><span><b>正在浏览的页面</b><small>示意背景 · 保持当前应用</small></span><span class="host-more">•••</span></div>
+        <div class="host-banner"><span>课堂资料</span><strong>在当前页面理解内容</strong><small>拾知悬浮在页面上方，不打断浏览。</small></div>
+        <div class="host-card"><div class="host-line wide"></div><div class="host-line"></div><div class="host-line medium"></div><div class="host-line wide"></div></div>
+      </div>
+
+      <button class="orb" id="orb" type="button" aria-label="收起拾知悬浮窗" aria-expanded="true"><svg><use href="#i-spark"/></svg></button>
+      <section class="overlay" id="overlay" aria-label="拾知悬浮窗">
+        <header class="overlay-head">
+          <div class="identity"><span class="identity-logo"><svg><use href="#i-spark"/></svg></span><span><strong>拾知</strong></span></div>
+          <button class="minimize" id="minimize" type="button" aria-label="收起悬浮窗">—</button>
+        </header>
+
+        <div class="overlay-scroll" id="overlay-scroll">
+          <div class="heading-row"><h2>随手处理</h2><span class="course-pill">当前课程</span></div>
+
+          <div class="tool-field" id="tool-field">
+            <span class="field-label">使用工具</span>
+            <button class="tool-trigger" id="tool-trigger" type="button" aria-expanded="false" aria-controls="tool-menu"><span id="tool-name">解释</span><svg><use href="#i-chevron"/></svg></button>
+            <div class="tool-menu" id="tool-menu" role="listbox" aria-label="选择工具" hidden></div>
+          </div>
+
+          <section class="tool-workspace" id="tool-workspace" aria-label="当前工具操作区"></section>
+
+          <label class="text-label" id="input-label" for="input-text">文字、问题或文件处理要求</label>
+          <textarea id="input-text" rows="4" placeholder="直接输入或粘贴文字；也可附加文档后说明你想怎样处理…"></textarea>
+          <div class="input-actions">
+            <button class="small-action gallery-action" id="gallery-button" type="button"><svg><use href="#i-file"/></svg>图库</button>
+            <input id="gallery-input" type="file" accept="image/*" hidden>
+            <button class="small-action" id="file-button" type="button"><svg><use href="#i-clip"/></svg>添加文档</button>
+            <input id="file-input" type="file" multiple accept=".txt,.md,.pdf,.doc,.docx,.ppt,.pptx,.xls,.xlsx,.csv,.png,.jpg,.jpeg,.webp" hidden>
+            <button class="small-action" id="screen-button" type="button"><svg><use href="#i-scan"/></svg>截屏</button>
+          </div>
+          <section class="protected-notice" id="protected-notice" hidden><strong>截图模糊或黑屏？</strong><p>结束屏幕共享后，选择已保存的清晰原图。</p><button id="protected-gallery" type="button">从图库选择</button></section>
+          <section class="gallery-preview" id="gallery-preview" hidden><div><strong>已选图片</strong><button id="remove-gallery" type="button" aria-label="移除图库图片">×</button></div><img id="gallery-image" alt="图库图片预览"><p id="gallery-meta"></p></section>
+          <div class="attachments" id="attachments" aria-live="polite"></div>
+
+          <div class="crop-card" id="crop-card" hidden>
+            <div class="crop-top"><strong>圈选当前屏幕</strong><span>交互示意</span></div>
+            <div class="sample-screen" id="sample-screen" role="img" aria-label="模拟的当前屏幕内容，可拖动圈选区域">
+              <div class="sample-title">学习材料 · 导数</div>
+              <p>函数的导数描述某一点附近的变化快慢。</p>
+              <p>若 f(x) = x²，则 f′(x) = 2x。</p>
+              <div class="sample-selection" id="sample-selection"></div>
+            </div>
+            <button class="inline-action" id="unclear-capture" type="button">截图不清晰？从图库选择</button>
+            <div class="crop-actions"><button type="button" id="cancel-crop">取消</button><button type="button" id="confirm-crop">确认选区并处理</button></div>
+          </div>
+
+          <section class="result-card" id="result-card" aria-live="polite" hidden>
+            <div class="result-head"><strong>处理结果</strong><span class="status-pill" id="result-status">处理中</span></div>
+            <p class="result-body" id="result-body">内容已提交，悬浮窗会保留在这里等待结果。</p>
+            <div class="result-detail" id="result-detail"></div>
+            <div class="result-sync" id="result-sync">等待同步到拾知应用</div>
+            <button class="copy-button" id="copy-button" type="button" hidden><svg><use href="#i-copy"/></svg><span id="copy-label">复制结果</span></button>
+          </section>
+        </div>
+
+        <footer class="overlay-foot"><button class="process-button" id="process-button" type="button"><svg><use href="#i-spark"/></svg><span id="process-label">开始解释</span></button><span class="preview-disclosure">交互预览 · 结果为示例</span></footer>
+      </section>
+      <div class="nav-handle" aria-hidden="true"></div>
+    </div>
+  </main>
+  <script type="module" src="/overlay-plan.js"></script>
+</body>
+</html>
